@@ -3,6 +3,7 @@ import math
 import tempfile
 from google.cloud import storage
 import gcs_settings as settings
+from start import publish
 # from start import publish
 
 def post(data):
@@ -25,7 +26,7 @@ def post(data):
     urls_fragmentos = []
 
     def handle_fragment(fragmento_path, idx, total):
-        print(f"📤 Subiendo fragmento {idx}/{total}")
+        print(f"Subiendo fragmento {idx}/{total}")
         fragmento_nombre = f"{id_examen}/fragmento_{idx}.edf"
         fragmento_url = upload_blob(fragmento_path, fragmento_nombre)
 
@@ -37,7 +38,7 @@ def post(data):
             "ubicacion_fragmento": fragmento_url
         }
 
-        print(out) # publish(out)
+        publish(out)
 
         urls_fragmentos.append(fragmento_url)
 
@@ -76,7 +77,7 @@ def upload_blob(source_file_name, destination_blob_name=None):
     return file_url
 
 
-def split_edf_file(file_path, part_size_mb=1, on_fragment_created=None):
+def split_edf_file(file_path, part_size_mb=200, on_fragment_created=None):
     """
     Divide un archivo .edf en partes de hasta `part_size_mb` MB.
     Llama a `on_fragment_created(path, idx, total)` tras crear cada fragmento.
@@ -118,9 +119,3 @@ def split_edf_file(file_path, part_size_mb=1, on_fragment_created=None):
 
 
 
-data = {
-    "id_paciente": "12345",
-    "id_examen": "test3",
-    "ubicacion_examen": "https://storage.googleapis.com/examenes-eeg/examenes/p15_Record4.edf"
-}
-post(data)
