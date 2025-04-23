@@ -15,7 +15,7 @@ channel = connection.channel()
 
 # Asegurarse de que la cola exista
 channel.queue_declare(queue='ia_requests', durable=True, exclusive=False, auto_delete=False)
-channel.queue_declare(queue='map_responses', durable=True, exclusive=False, auto_delete=False)
+channel.queue_declare(queue='map_requests', durable=True, exclusive=False, auto_delete=False)
 
 def callback(ch, method, properties, body):
     from post import post
