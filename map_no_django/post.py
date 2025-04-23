@@ -3,7 +3,7 @@ import math
 import tempfile
 from google.cloud import storage
 import gcs_settings as settings
-from start import publish
+
 # from start import publish
 
 def post(data):
@@ -37,7 +37,7 @@ def post(data):
             "total_fragmentos": total,
             "ubicacion_fragmento": fragmento_url
         }
-
+        from start import publish
         publish(out)
 
         urls_fragmentos.append(fragmento_url)
@@ -77,7 +77,7 @@ def upload_blob(source_file_name, destination_blob_name=None):
     return file_url
 
 
-def split_edf_file(file_path, part_size_mb=200, on_fragment_created=None):
+def split_edf_file(file_path, part_size_mb=1, on_fragment_created=None):
     """
     Divide un archivo .edf en partes de hasta `part_size_mb` MB.
     Llama a `on_fragment_created(path, idx, total)` tras crear cada fragmento.
