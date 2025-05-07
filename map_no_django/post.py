@@ -26,7 +26,7 @@ def post_message(data: dict) -> None:
 
     def handle_fragment(path, idx, total):
         print(f"Subiendo fragmento {idx}/{total}")
-        fragmento_nombre = f"{id_examen}/fragmento_{idx}.edf"
+        fragmento_nombre = f"{id_examen}_fragmento_{idx}.edf"
         fragmento_url = upload_blob(path, fragmento_nombre)
 
         mensaje = {
@@ -72,7 +72,7 @@ def upload_blob(source_file_name: str, destination_blob_name: str = None) -> str
 
     url = f"https://storage.googleapis.com/{bucket_name}/{full_dest}"
     print(f"✅ Archivo subido: {url}")
-    return url
+    return full_dest
 
 
 def split_edf_file(file_path: str, part_size_mb: int = 250, on_fragment_created=None):
