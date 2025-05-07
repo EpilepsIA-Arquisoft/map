@@ -38,6 +38,7 @@ def post(data: dict) -> None:
             "ubicacion_fragmento": fragmento_url
         }
         publish(mensaje)
+        print("Ubicacion fragmento: ", fragmento_url)
         print(f"✅ Mensaje publicado: {mensaje}")
 
     fragments, total_parts = split_edf_file(
