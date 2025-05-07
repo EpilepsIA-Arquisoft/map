@@ -3,7 +3,7 @@ import math
 import tempfile
 from google.cloud import storage
 import gcs_settings as settings
-from messaging import publish
+from start import publish
 
 
 def post(data: dict) -> None:
@@ -33,7 +33,7 @@ def post(data: dict) -> None:
         mensaje = {
             "id_paciente": id_paciente,
             "id_examen": id_examen,
-            "numero_fragmento": idx,
+            "num_fragmento": idx,
             "total_fragmentos": total,
             "ubicacion_fragmento": fragmento_url
         }
@@ -42,8 +42,8 @@ def post(data: dict) -> None:
 
     fragments, total_parts = split_edf_file(
         temp_file_path,
-        part_size_mb=1,
-        on_fragment_created=handle_fragment
+        part_size_mb= 250,
+        on_fragment_created= handle_fragment
     )
 
     # Limpieza de archivos temporales
@@ -73,7 +73,7 @@ def upload_blob(source_file_name: str, destination_blob_name: str = None) -> str
     return url
 
 
-def split_edf_file(file_path: str, part_size_mb: int = 1, on_fragment_created=None):
+def split_edf_file(file_path: str, part_size_mb: int = 250, on_fragment_created=None):
     """
     Divide un archivo .edf en fragmentos de hasta `part_size_mb` MB.
     Llama a `on_fragment_created(path, idx, total)` tras crear cada fragmento.

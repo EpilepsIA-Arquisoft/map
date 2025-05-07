@@ -5,4 +5,4 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "C:/Users/juanf/jjdc-453414-7962e
 
 
 GCS_BUCKET_NAME = "examenes-eeg"
-GCS_BASE_FOLDER = "uploads/"
+GCS_BASE_FOLDER = "shards/"
