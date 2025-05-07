@@ -3,7 +3,6 @@ import math
 import tempfile
 from google.cloud import storage
 import gcs_settings as settings
-import start as st
 
 
 def post_message(data: dict) -> None:
@@ -37,7 +36,9 @@ def post_message(data: dict) -> None:
             "total_fragmentos": total,
             "ubicacion_fragmento": fragmento_url
         }
-        st.publish(mensaje)
+        
+        from start import publish
+        publish(mensaje)
         print("Ubicacion fragmento: ", fragmento_url)
         print(f"✅ Mensaje publicado: {mensaje}")
 
