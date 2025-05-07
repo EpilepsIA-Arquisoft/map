@@ -27,13 +27,13 @@ def post(data: dict) -> None:
 
     def handle_fragment(path, idx, total):
         print(f"Subiendo fragmento {idx}/{total}")
-        fragmento_nombre = f"{id_examen}/fragmento_{idx}.edf"
+        fragmento_nombre = f"{id_examen}_fragmento_{idx}.edf"
         fragmento_url = upload_blob(path, fragmento_nombre)
 
         mensaje = {
             "id_paciente": id_paciente,
             "id_examen": id_examen,
-            "numero_fragmento": idx,
+            "num_fragmento": idx,
             "total_fragmentos": total,
             "ubicacion_fragmento": fragmento_url
         }
@@ -42,7 +42,7 @@ def post(data: dict) -> None:
 
     fragments, total_parts = split_edf_file(
         temp_file_path,
-        part_size_mb=1,
+        part_size_mb=  250,
         on_fragment_created=handle_fragment
     )
 
@@ -70,10 +70,10 @@ def upload_blob(source_file_name: str, destination_blob_name: str = None) -> str
 
     url = f"https://storage.googleapis.com/{bucket_name}/{full_dest}"
     print(f"✅ Archivo subido: {url}")
-    return url
+    return full_dest
 
 
-def split_edf_file(file_path: str, part_size_mb: int = 1, on_fragment_created=None):
+def split_edf_file(file_path: str, part_size_mb: int = 250, on_fragment_created=None):
     """
     Divide un archivo .edf en fragmentos de hasta `part_size_mb` MB.
     Llama a `on_fragment_created(path, idx, total)` tras crear cada fragmento.

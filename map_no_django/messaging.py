@@ -1,8 +1,8 @@
 import pika
-import json
+import Cyph as cy
 
 # RabbitMQ connection settings
-rabbit_host = '10.128.0.16'
+rabbit_host = '10.128.0.20'
 rabbit_user = 'isis2503'
 rabbit_password = '1234'
 
@@ -27,6 +27,6 @@ def publish(message: dict, queue: str = 'ia_requests') -> None:
     _publish_channel.basic_publish(
         exchange='',
         routing_key=queue,
-        body=json.dumps(message),
+        body=cy.encrypt_json(message),
         properties=pika.BasicProperties(delivery_mode=2)
     )

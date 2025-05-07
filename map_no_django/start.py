@@ -1,11 +1,10 @@
 import pika
-import json
-
+import Cyph as cy
 
 #from IA_predict import predict  # tu lógica IA aquí
 
 # Conexión al servidor RabbitMQ
-rabbit_host = '10.128.0.16'
+rabbit_host = '10.128.0.20'
 rabbit_user = 'isis2503'
 rabbit_password = '1234'
 connection = pika.BlockingConnection(
@@ -19,17 +18,16 @@ channel.queue_declare(queue='map_requests', durable=True, exclusive=False, auto_
 
 def callback(ch, method, properties, body):
     from post import post
-    entrada = json.loads(body)
+    entrada = cy.decrypt_json(body)
     post(entrada)
     
-    
-    ch.basic_ack(delivery_tag=method.delivery_tag) ###################################################
+    ch.basic_ack(delivery_tag=method.delivery_tag)
 
 def publish(message):
     channel.basic_publish(
         exchange='',
         routing_key='ia_requests',
-        body=json.dumps(message),
+        body= cy.encrypt_json(message),
         properties=pika.BasicProperties(
             delivery_mode=2  # 1 = no persistente, 2 = persistente
         )
