@@ -1,6 +1,6 @@
 import pika
 import json
-from post import post
+from post import post_message
 import Cyph as cy
 
 # Conexión al servidor RabbitMQ
@@ -18,7 +18,7 @@ channel.queue_declare(queue='map_requests', durable=True, exclusive=False, auto_
 
 def callback(ch, method, properties, body):
     entrada = cy.decrypt_json(body)
-    post(entrada)
+    post_message(entrada)
     
     # Enviar resultado
     ch.basic_ack(delivery_tag=method.delivery_tag)

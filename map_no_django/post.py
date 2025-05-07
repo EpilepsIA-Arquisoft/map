@@ -6,7 +6,7 @@ import gcs_settings as settings
 from start import publish
 
 
-def post(data: dict) -> None:
+def post_message(data: dict) -> None:
     """
     Descarga un archivo .edf, lo divide en fragmentos y publica cada fragmento en RabbitMQ.
     """
