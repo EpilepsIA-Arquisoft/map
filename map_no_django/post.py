@@ -5,7 +5,6 @@ from google.cloud import storage
 import gcs_settings as settings
 from messaging import publish
 
-
 def post(data: dict) -> None:
     """
     Descarga un archivo .edf, lo divide en fragmentos y publica cada fragmento en RabbitMQ.

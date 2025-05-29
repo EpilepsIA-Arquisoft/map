@@ -4,7 +4,7 @@ import Cyph as cy
 #from IA_predict import predict  # tu lógica IA aquí
 
 # Conexión al servidor RabbitMQ
-rabbit_host = '10.128.0.20'
+rabbit_host = '10.128.0.9'
 rabbit_user = 'isis2503'
 rabbit_password = '1234'
 connection = pika.BlockingConnection(

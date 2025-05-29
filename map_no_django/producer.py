@@ -17,7 +17,7 @@ channel.queue_declare(queue='map_requests', durable=True, exclusive=False, auto_
 mensaje = {
     "id_paciente": "12345",
     "id_examen": "test4",
-    "ubicacion_examen": "https://storage.googleapis.com/examenes-eeg/examenes/p15_Record4.edf"
+    "ubicacion_examen": "https://storage.cloud.google.com/examenes_pull/examenes_clinica/examen_patient1.edf?authuser=1"
 }
 
 # Publica el mensaje
