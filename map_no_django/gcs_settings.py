@@ -1,7 +1,7 @@
 import os
 
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/isis2503/jjdc-453414-7962ee87f1a0.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/isis2503/s4-g6-sprint4-57b0584665d6.json"
 
 
 GCS_BUCKET_NAME = "examenes_pull"
