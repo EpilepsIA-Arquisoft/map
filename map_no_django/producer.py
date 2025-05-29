@@ -17,7 +17,7 @@ channel.queue_declare(queue='map_requests', durable=True, exclusive=False, auto_
 mensaje = {
     "id_paciente": "12345",
     "id_examen": "test4",
-    "ubicacion_examen": "https://storage.cloud.google.com/examenes_pull/examenes_clinica/examen_patient1.edf"
+    "ubicacion_examen": "examenes_pull/examenes_clinica/examen_patient1.edf"
 }
 
 # Publica el mensaje
